@@ -2,20 +2,18 @@
 
 public class Main extends MonoBehaviour
 {
-  public var player : GameObject[];
-  protected var playerDirection : Vector3[];
-  
-  protected var menuActive : boolean = false;
-  
-  protected var frameCounter8 : int = 0;
+  public static var audioListener : AudioListener = null;
 
+  protected var menuActive : boolean = false;
+
+  //public var playerList : GameObject[];
+  public var entities : Entity[];
+  
   function Start()
   {
-    if( playerDirection == null )
+    if( Main.audioListener == null )
     {
-      playerDirection = new Vector3[2];
-      playerDirection[0] = new Vector3();
-      playerDirection[1] = new Vector3();
+      Main.audioListener = audio;
     }
   }
 
@@ -23,6 +21,7 @@ public class Main extends MonoBehaviour
   {
     processInput();
     processMove();
+    processAnimation();
   }
   
   protected function processInput()
@@ -41,55 +40,39 @@ public class Main extends MonoBehaviour
   
   protected function processPlayerInput()
   {
-    var xDirection : int = 0;
-    for( var playerIndex : int = player.Length - 1; playerIndex > -1; playerIndex-- )
+    var entity : Entity = null;
+    for( var entityIndex : int = entities.Length - 1; entityIndex > -1; entityIndex-- )
     {
-      //var currentPlayer : GameObject = player[playerIndex];
-      
-      xDirection = 0.0f;
-      if( playerIndex == 0 )
+      entity = entities[entityIndex];
+      if( entity == null )
       {
-        if( Input.GetKey( KeyCode.LeftArrow ) )
-        {
-          xDirection -= 1.0f;
-        }
-        
-        if( Input.GetKey( KeyCode.RightArrow ) )
-        {
-          xDirection += 1.0f;
-        }
+        continue;
       }
       
-      playerDirection[playerIndex].x = xDirection;
+      entity.pollIntendedDirection();
+      
+      entity.direction = entity.intendedDirection;
+      entity.velocity = entity.direction * 0.25f;
     }
   }
   
   protected function processMove()
   {
-    if( --frameCounter8 >= 0 )
+    var entity : Entity = null;
+    for( var entityIndex : int = entities.Length - 1; entityIndex > -1; entityIndex-- )
     {
-      return;
-    }
-    
-    frameCounter8 += 8;
-    
-    var currentPlayer : GameObject = null;
-    var xDirection : float = 0.0f;
-    for( var playerIndex : int = player.Length - 1; playerIndex > -1; playerIndex-- )
-    {
-      xDirection = playerDirection[playerIndex].x;
-    
-      // Move player based on direction.
-      if( xDirection != 0.0 )
+      entity = entities[entityIndex];
+      if( entity == null )
       {
-        currentPlayer = player[playerIndex];
-        
-        //currentPlayer.transform.position.x += 1.0f * xDirection;
-        //currentPlayer.rigidbody.AddForce( xDirection * 100.0f, 0, 0 );
-        
-        currentPlayer.rigidbody.velocity.x += xDirection * 5.0f;
+        continue;
       }
+      
+      entity.move();
     }
+  }
+  
+  protected function processAnimation()
+  {
     
   }
 }

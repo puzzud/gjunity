@@ -2,17 +2,26 @@
 
 public class PlayerEntity extends Entity
 {
-  /*function Start()
-  {
-    //this.health = 100.0f;
-    //this.alignment = 1.0f;
-  }*/
+  var eatSound : AudioClip;
 
-  /*function OnCollisionEnter( collision : Collision )
+  function OnTriggerEnter( collider : Collider )
   {
-    //collision.collider;
-  
-    //enabled = false;
-    //audio.Play();
-  }*/
+    var entity : Entity = collider.GetComponent( Entity );
+    if( entity == null )
+    {
+      return;
+    }
+    
+    if( entity.alignment < 0.0f )
+    {
+      enabled = false;
+      entity.collider.enabled = false;
+      entity.renderer.enabled = false;
+      
+      if( eatSound != null )
+      {
+        audio.PlayOneShot( eatSound );
+      }
+    }
+  }
 }
