@@ -13,7 +13,7 @@ public class Main extends MonoBehaviour
   {
     if( Main.audioListener == null )
     {
-      Main.audioListener = audio;
+      //Main.audioListener = audio;
     }
   }
 
