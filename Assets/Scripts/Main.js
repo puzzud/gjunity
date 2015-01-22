@@ -35,6 +35,18 @@ public class Main extends MonoBehaviour
       Application.Quit();
     }
     
+    if( Input.GetKey( KeyCode.Alpha1 ) )
+    {
+      print( "Load ball game" );
+      Application.LoadLevel( "BallPlatformGame" );
+    }
+    else
+    if( Input.GetKey( KeyCode.Alpha2 ) )
+    {
+      print( "Load base" );
+      Application.LoadLevel( "base" );
+    }
+    
     processPlayerInput();
   }
   
