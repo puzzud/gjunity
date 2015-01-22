@@ -1,24 +1,33 @@
 ﻿#pragma strict
 
-var increment : float = 1;
-
 function Start () {
 
 }
 
-function Update () {
+function FixedUpdate () {
+	var downDirection : Vector3 = new Vector3 (0,-1,0);	
+	var newVec : Vector3 = new Vector3();
 	
-	//Input.GetAxis("Horizontal");
-	if(Input.GetKey(KeyCode.UpArrow)){
-		transform.RotateAround(Vector3.forward, increment);
-	} else if(Input.GetKey(KeyCode.DownArrow)){
-		transform.RotateAround(Vector3.forward, -increment);
-	} else if(Input.GetKey(KeyCode.LeftArrow)){
-		transform.RotateAround(Vector3.left, increment);
-	} else if(Input.GetKey(KeyCode.RightArrow)){
-		transform.RotateAround(Vector3.left, -increment);
+	if(Input.GetKey(KeyCode.UpArrow)){		
+		newVec = this.rigidbody.position;
+		newVec.z += -5;
+		this.rigidbody.AddForceAtPosition(10*downDirection, newVec);
+	} else if (Input.GetKey(KeyCode.DownArrow)){
+		newVec = this.rigidbody.position;
+		newVec.z += 5;
+		this.rigidbody.AddForceAtPosition(10*downDirection, newVec);
+	} else if (Input.GetKey(KeyCode.LeftArrow)){
+		newVec = this.rigidbody.position;
+		newVec.x += 5;
+		this.rigidbody.AddForceAtPosition(10*downDirection, newVec);
+	} else if (Input.GetKey(KeyCode.RightArrow)){
+		newVec = this.rigidbody.position;
+		newVec.x += -5;
+		this.rigidbody.AddForceAtPosition(10*downDirection, newVec);
 	}
-	
-	//Inpute 
+}
 
+function Update () {
+
+	
 }
