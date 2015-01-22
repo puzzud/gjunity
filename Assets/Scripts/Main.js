@@ -5,16 +5,14 @@ public class Main extends MonoBehaviour
   public static var audioListener : AudioListener = null;
 
   protected var menuActive : boolean = false;
+  public var menuCanvas : Canvas;
 
   //public var playerList : GameObject[];
   public var entities : Entity[];
   
   function Start()
   {
-    if( Main.audioListener == null )
-    {
-      //Main.audioListener = audio;
-    }
+    
   }
 
   function Update()
@@ -24,15 +22,26 @@ public class Main extends MonoBehaviour
     processAnimation();
   }
   
+  public function quit()
+  {
+    Application.Quit();
+  }
+  
   protected function processInput()
   {
-    if( Input.GetKey( KeyCode.Escape ) )
+    if( Input.GetKeyDown( KeyCode.Escape ) )
     {
       // Activate or deactivate menu.
       menuActive = !menuActive;
-      
-      // NOTE: Temporary quit.
-      Application.Quit();
+      print( "" + menuCanvas.name );
+      var canvasGroup : CanvasGroup = menuCanvas.GetComponent( CanvasGroup );
+      if( canvasGroup != null )
+      {
+        print( "canvasGroup" );
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+      }
     }
     
     if( Input.GetKey( KeyCode.Alpha1 ) )
