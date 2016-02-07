@@ -25,7 +25,7 @@ public class Health extends MonoBehaviour
     
     //print( "Health" );
     
-    this.active = false;
+    //this.active = false;
     //this.collider.enabled = false;
     //this.renderer.enabled = false;
   }

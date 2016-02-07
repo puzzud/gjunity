@@ -15,12 +15,12 @@ public class PlayerEntity extends Entity
     if( entity.alignment < 0.0f )
     {
       enabled = false;
-      entity.collider.enabled = false;
-      entity.renderer.enabled = false;
+      entity.GetComponent.<Collider>().enabled = false;
+      entity.GetComponent.<Renderer>().enabled = false;
       
       if( eatSound != null )
       {
-        audio.PlayOneShot( eatSound );
+        GetComponent.<AudioSource>().PlayOneShot( eatSound );
       }
     }
   }

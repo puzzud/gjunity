@@ -9,21 +9,21 @@ function FixedUpdate () {
 	var newVec : Vector3 = new Vector3();
 	
 	if(Input.GetKey(KeyCode.UpArrow)){		
-		newVec = this.rigidbody.position;
+		newVec = this.GetComponent.<Rigidbody>().position;
 		newVec.z += -5;
-		this.rigidbody.AddForceAtPosition(10*downDirection, newVec);
+		this.GetComponent.<Rigidbody>().AddForceAtPosition(10*downDirection, newVec);
 	} else if (Input.GetKey(KeyCode.DownArrow)){
-		newVec = this.rigidbody.position;
+		newVec = this.GetComponent.<Rigidbody>().position;
 		newVec.z += 5;
-		this.rigidbody.AddForceAtPosition(10*downDirection, newVec);
+		this.GetComponent.<Rigidbody>().AddForceAtPosition(10*downDirection, newVec);
 	} else if (Input.GetKey(KeyCode.LeftArrow)){
-		newVec = this.rigidbody.position;
+		newVec = this.GetComponent.<Rigidbody>().position;
 		newVec.x += 5;
-		this.rigidbody.AddForceAtPosition(10*downDirection, newVec);
+		this.GetComponent.<Rigidbody>().AddForceAtPosition(10*downDirection, newVec);
 	} else if (Input.GetKey(KeyCode.RightArrow)){
-		newVec = this.rigidbody.position;
+		newVec = this.GetComponent.<Rigidbody>().position;
 		newVec.x += -5;
-		this.rigidbody.AddForceAtPosition(10*downDirection, newVec);
+		this.GetComponent.<Rigidbody>().AddForceAtPosition(10*downDirection, newVec);
 	}
 }
 

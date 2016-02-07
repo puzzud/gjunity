@@ -39,9 +39,9 @@ public class Projectile extends MonoBehaviour
         direction = transform.forward;
       }
       
-      if( transform.rigidbody != null )
+      if( transform.GetComponent.<Rigidbody>() != null )
       {
-        transform.rigidbody.velocity += direction * velocity;
+        transform.GetComponent.<Rigidbody>().velocity += direction * velocity;
       }
     
       if( fireSound != null )
